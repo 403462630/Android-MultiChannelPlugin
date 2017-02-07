@@ -8,4 +8,4 @@
 /*/build/
 /captures
 .externalNativeBuild
-plugin/build/
+plugin/build/*
