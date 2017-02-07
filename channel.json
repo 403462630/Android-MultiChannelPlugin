@@ -1,0 +1,177 @@
+[
+    {
+        "id": 1,
+        "name": "应用宝",
+        "code": "tencentmarket",
+        "createdAt": "2016-12-02T01:58:11.000Z",
+        "updatedAt": "2016-12-03T16:03:43.000Z"
+    },
+    {
+        "id": 2,
+        "name": "百度手助",
+        "code": "baidumarket",
+        "createdAt": "2016-12-14T06:44:01.000Z",
+        "updatedAt": "2016-12-14T06:44:01.000Z"
+    },
+    {
+        "id": 3,
+        "name": "华为智汇云",
+        "code": "huaweimarket",
+        "createdAt": "2016-12-14T06:44:13.000Z",
+        "updatedAt": "2016-12-14T06:44:13.000Z"
+    },
+    {
+        "id": 4,
+        "name": "UC市场",
+        "code": "ucmarket",
+        "createdAt": "2016-12-14T06:44:28.000Z",
+        "updatedAt": "2016-12-14T06:44:28.000Z"
+    },
+    {
+        "id": 5,
+        "name": "vivo",
+        "code": "vivomarket",
+        "createdAt": "2016-12-14T07:01:43.000Z",
+        "updatedAt": "2016-12-14T07:01:43.000Z"
+    },
+    {
+        "id": 6,
+        "name": "魅族",
+        "code": "meizumarket",
+        "createdAt": "2016-12-14T07:01:55.000Z",
+        "updatedAt": "2016-12-14T07:01:55.000Z"
+    },
+    {
+        "id": 7,
+        "name": "安智市场",
+        "code": "anzhimarket",
+        "createdAt": "2016-12-14T07:03:04.000Z",
+        "updatedAt": "2016-12-14T07:03:04.000Z"
+    },
+    {
+        "id": 8,
+        "name": "小米",
+        "code": "xiaomimarket",
+        "createdAt": "2016-12-14T07:03:17.000Z",
+        "updatedAt": "2016-12-14T07:03:17.000Z"
+    },
+    {
+        "id": 9,
+        "name": "360",
+        "code": "360market",
+        "createdAt": "2016-12-14T07:03:32.000Z",
+        "updatedAt": "2016-12-14T07:03:32.000Z"
+    },
+    {
+        "id": 10,
+        "name": "豌豆荚",
+        "code": "wandoujiamarket",
+        "createdAt": "2016-12-14T07:04:13.000Z",
+        "updatedAt": "2016-12-14T07:04:13.000Z"
+    },
+    {
+        "id": 11,
+        "name": "金立",
+        "code": "jinlimarket",
+        "createdAt": "2016-12-14T07:07:41.000Z",
+        "updatedAt": "2016-12-14T07:07:41.000Z"
+    },
+    {
+        "id": 12,
+        "name": "酷派",
+        "code": "coolpadmarket",
+        "createdAt": "2016-12-14T07:07:56.000Z",
+        "updatedAt": "2016-12-14T07:07:56.000Z"
+    },
+    {
+        "id": 13,
+        "name": "oppo",
+        "code": "oppomarket",
+        "createdAt": "2016-12-14T07:08:19.000Z",
+        "updatedAt": "2016-12-14T07:08:19.000Z"
+    },
+    {
+        "id": 14,
+        "name": "搜狗市场",
+        "code": "sogoumarket",
+        "createdAt": "2016-12-14T07:08:55.000Z",
+        "updatedAt": "2016-12-14T07:08:55.000Z"
+    },
+    {
+        "id": 15,
+        "name": "中国移动",
+        "code": "chinaMobilemarket",
+        "createdAt": "2016-12-14T07:09:06.000Z",
+        "updatedAt": "2016-12-14T07:09:06.000Z"
+    },
+    {
+        "id": 16,
+        "name": "中国联通",
+        "code": "chinaUnicommarket",
+        "createdAt": "2016-12-14T07:09:18.000Z",
+        "updatedAt": "2016-12-14T07:09:18.000Z"
+    },
+    {
+        "id": 17,
+        "name": "中国电信",
+        "code": "chinaDianxinmarket",
+        "createdAt": "2016-12-14T07:09:30.000Z",
+        "updatedAt": "2016-12-14T07:09:30.000Z"
+    },
+    {
+        "id": 18,
+        "name": "乐视商店",
+        "code": "leshimarket",
+        "createdAt": "2016-12-14T07:09:43.000Z",
+        "updatedAt": "2016-12-14T07:09:43.000Z"
+    },
+    {
+        "id": 19,
+        "name": "机锋市场",
+        "code": "gfanmarket",
+        "createdAt": "2016-12-14T07:09:56.000Z",
+        "updatedAt": "2016-12-14T07:09:56.000Z"
+    },
+    {
+        "id": 20,
+        "name": "锤子商店",
+        "code": "smartisanstore",
+        "createdAt": "2016-12-14T07:12:42.000Z",
+        "updatedAt": "2016-12-14T07:15:08.000Z"
+    },
+    {
+        "id": 21,
+        "name": "N多网",
+        "code": "nduoamarket",
+        "createdAt": "2016-12-14T07:13:40.000Z",
+        "updatedAt": "2016-12-14T07:13:40.000Z"
+    },
+    {
+        "id": 22,
+        "name": "应用汇",
+        "code": "appchinamarket",
+        "createdAt": "2016-12-14T07:14:48.000Z",
+        "updatedAt": "2016-12-14T07:14:48.000Z"
+    },
+    {
+        "id": 23,
+        "name": "木蚂蚁",
+        "code": "mumayimarket",
+        "createdAt": "2016-12-14T07:15:58.000Z",
+        "updatedAt": "2016-12-14T07:15:58.000Z"
+    },
+    {
+        "id": 24,
+        "name": "联想开放平台",
+        "code": "lenovomarket",
+        "createdAt": "2016-12-14T07:16:08.000Z",
+        "updatedAt": "2016-12-14T07:16:08.000Z"
+    },
+    {
+        "id": 25,
+        "name": "优亿市场",
+        "code": "eoemarket",
+        "createdAt": "2016-12-14T07:16:22.000Z",
+        "updatedAt": "2016-12-14T07:16:22.000Z"
+    }
+]
