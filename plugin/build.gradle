@@ -1,8 +1,9 @@
 apply plugin: 'groovy'
-apply plugin: 'maven'
+
+apply from: "../bintray.gradle"
 
 group="fc.multi.channel"
-version="1.0.0"
+version="1.0.1"
 
 dependencies {
     compile gradleApi()
@@ -10,8 +11,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: 'file:libs')
-    }
-}
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        repository(url: 'file:libs')
+//    }
+//}
