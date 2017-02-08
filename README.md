@@ -1,7 +1,7 @@
 # Android-MultiChannelPlugin
 多渠道打包插件，支持添加额外的信息extInfo，并提供library 读取渠道id和extInfo，用法如下：
 
-![json数据格式](channel.json)
+ [json数据格式](channel.json)
 
 ### 怎么使用plugin
 1 . 在buildscript中添加如下配置
