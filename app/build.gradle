@@ -9,7 +9,9 @@ buildscript {
         classpath 'fc.multi.channel:plugin:1.0.3'
     }
 }
-
+repositories {
+    maven { url "http://fc.bintray.com/maven" }
+}
 
 android {
     compileSdkVersion 25
