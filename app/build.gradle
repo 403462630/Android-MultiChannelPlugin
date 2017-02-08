@@ -4,7 +4,6 @@ apply plugin: 'multiChannel'
 buildscript {
     repositories {
         maven { url "http://fc.bintray.com/maven" }
-//        maven { url "../plugin/libs" }
     }
     dependencies {
         classpath 'fc.multi.channel:plugin:1.0.3'
@@ -42,11 +41,17 @@ android {
 }
 
 multiChannel {
+    //签名密码
     storePassword "123456"
+    //签名证书
     storeFile file('../test.jks')
     channel {
+        //本地多渠道配置json文件
         url 'file:../channel.json'
+        //或者是http地址
+//        url "http://pbservice.newwinner.net.cn:11010/_market"
     }
+    //生成的apk名称，code、id、name对应json中的key
     apkName "app-{code}-{id}-{name}-${android.defaultConfig.versionName}.apk"
 }
 
@@ -56,7 +61,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':library')
+    compile 'fc.multi.channel:library:1.0.0'
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile "com.google.code.gson:gson:2.3.1"
     testCompile 'junit:junit:4.12'
