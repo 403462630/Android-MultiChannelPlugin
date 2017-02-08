@@ -1,9 +1,32 @@
 apply plugin: 'groovy'
 
+ext {
+    projectName = "FcMultiChannelPlugin"
+}
+
 apply from: "../bintray.gradle"
 
 group="fc.multi.channel"
-version="1.0.1"
+version="1.0.3"
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+//task javadoc(type: Javadoc) {
+//    source = sourceSets.main.groovy.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
 
 dependencies {
     compile gradleApi()

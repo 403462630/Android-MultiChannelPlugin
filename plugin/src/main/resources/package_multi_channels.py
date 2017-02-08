@@ -69,9 +69,13 @@ commands.getoutput("find {base} -type f -not -name '{base_apk}' -delete".format(
 for channel in data:
     if channel_ids and not (str(channel["id"]) in channel_ids):
         continue
-    empty_channel_file_name = "pbchannel_{channel}_{channel_id}".format(channel=channel["code"], channel_id=channel["id"])
+    empty_channel_file_name = "fc-multi-channel-{channel}-{channel_id}".format(channel=channel["code"], channel_id=channel["id"])
     empty_channel_file = "{base}/META-INF/{empty_channel_file_name}".format(base=base_dir, empty_channel_file_name=empty_channel_file_name)
     commands.getoutput("touch {empty_channel_file}".format(empty_channel_file=empty_channel_file))
+    if channel.has_key("extInfo"):
+        channel_file_writer = open(empty_channel_file, 'w')
+        channel_file_writer.write(json.dumps(channel["extInfo"], ensure_ascii=False))
+        channel_file_writer.close()
     apk_name = ("{base}/" + default_apk_name).format(base=base_dir, code=channel['code'], id=channel['id'], name=channel['name'])
     commands.getoutput("cp {base}/{base_apk} {new_apk}".format(base=base_dir, new_apk=apk_name, base_apk=base_apk))
     zipped = zipfile.ZipFile(apk_name, 'a', zipfile.ZIP_DEFLATED)
