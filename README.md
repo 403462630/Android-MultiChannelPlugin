@@ -46,6 +46,11 @@ multiChannel {
 ./gradlew assembleReleaseMultiChannel -PchannelIds=1,2
 ```
 
+如果你在app的build.gradle中添加了productFlavors，那么task的名字就不一定是assembleDebugMultiChannel和assembleReleaseMultiChannel了,
+你可以在下图中查看task的名字
+
+![tmp754639d2.png]
+
 ### 怎么读取渠道和extInfo信息
 1. 在build.gradle中配置如下：
 ```
