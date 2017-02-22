@@ -26,7 +26,7 @@ sdk = H['sdk.dir']
 apk_signer_str = commands.getoutput("find {sdk}/build-tools/ -name 'apksigner'".format(sdk=sdk))
 apk_signer_arr = apk_signer_str.split('\n')
 print apk_signer_arr
-apk_signer = apk_signer_arr[0]
+apk_signer = apk_signer_arr[-1]
 
 key_password = '123456'
 base_dir = "app/build/outputs/apk"
