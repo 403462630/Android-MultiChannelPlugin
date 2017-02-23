@@ -87,6 +87,7 @@ for channel in data:
       print 'apksigner {apk_name}: warning no found keystore'.format(apk_name=apk_name)
     else:
       signapk = "echo '{key_password}' | {apk_signer} sign --ks {key_store} {apk_name}".format(key_password=key_password, apk_signer=apk_signer, key_store=key_store, apk_name=apk_name)
+      print signapk
       result = commands.getoutput(signapk)
       result_array = result.split('\n')
       if len(result_array) > 1:
