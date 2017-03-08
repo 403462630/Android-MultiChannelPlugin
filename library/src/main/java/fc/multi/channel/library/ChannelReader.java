@@ -19,18 +19,24 @@ import java.util.zip.ZipFile;
  */
 public class ChannelReader {
     private static final String FILE_NAME = "channel_file";
-    private static final String APP_CHANNEL_ID = "app_channel_id";
-    private static final String APP_CHANNEL_EXT_INFO = "app_channel_ext_info";
+    private static final String KEY_APP_CHANNEL_ID = "app_channel_id";
+    private static final String KEY_APP_DEFAULT_CHANNEL_ID = "app_default_channel_id";
+    private static final String KEY_APP_CHANNEL_EXT_INFO = "app_channel_ext_info";
     private final static String DEFAULT_CHANNEL_ID = "0";
     private static SharedPreferences getSharePreferences(Context context) {
         return context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 
     public static void init(Context context) {
-        update(context);
+        init(context, DEFAULT_CHANNEL_ID);
     }
 
-    private static String update(Context context) {
+    public static void init(Context context, String defaultChannelId) {
+        saveDefaultChannelId(context, defaultChannelId);
+        update(context, defaultChannelId);
+    }
+
+    private static String update(Context context, String defaultChannelId) {
         ApplicationInfo appinfo = context.getApplicationInfo();
         String sourceDir = appinfo.sourceDir;
         String ret = "";
@@ -75,32 +81,42 @@ public class ChannelReader {
         }
 
         if (TextUtils.isEmpty(ret)) {
-            return DEFAULT_CHANNEL_ID;
+            return defaultChannelId;
         } else {
-            String marketId = DEFAULT_CHANNEL_ID;
+            String marketId = defaultChannelId;
             final int contentMinLen = 3;
             String[] split = ret.split("-");
             if (split != null && split.length >= contentMinLen) {
                 marketId = split[split.length - 1];
             }
             SharedPreferences.Editor editor = getSharePreferences(context).edit();
-            editor.putString(APP_CHANNEL_ID, marketId);
-            editor.putString(APP_CHANNEL_EXT_INFO, extInfo);
+            editor.putString(KEY_APP_CHANNEL_ID, marketId);
+            editor.putString(KEY_APP_CHANNEL_EXT_INFO, extInfo);
             editor.commit();
             return marketId;
         }
     }
 
     public static String getChannelId(Context context) {
-        if (getSharePreferences(context).getString(APP_CHANNEL_ID, null) != null) {
-            return getSharePreferences(context).getString(APP_CHANNEL_ID, DEFAULT_CHANNEL_ID);
+        if (getSharePreferences(context).getString(KEY_APP_CHANNEL_ID, null) != null) {
+            return getSharePreferences(context).getString(KEY_APP_CHANNEL_ID, getDefaultChannelId(context));
         } else {
-            return update(context);
+            return update(context, getDefaultChannelId(context));
         }
     }
 
+    private static void saveDefaultChannelId(Context context, String defaultChannelId) {
+        SharedPreferences.Editor editor = getSharePreferences(context).edit();
+        editor.putString(KEY_APP_DEFAULT_CHANNEL_ID, defaultChannelId);
+        editor.commit();
+    }
+
+    private static String getDefaultChannelId(Context context) {
+        return getSharePreferences(context).getString(KEY_APP_DEFAULT_CHANNEL_ID, DEFAULT_CHANNEL_ID);
+    }
+
     public static Map getExtInfo(Context context) {
-        String value = getSharePreferences(context).getString(APP_CHANNEL_EXT_INFO, "");
+        String value = getSharePreferences(context).getString(KEY_APP_CHANNEL_EXT_INFO, "");
         return new Gson().fromJson(value, Map.class);
     }
 }
