@@ -8,6 +8,7 @@ import org.gradle.api.tasks.TaskAction
  */
 class ChannelMaker extends DefaultTask {
     private static final String PROPERTY_CHANNEL_IDS = 'channelIds'
+    private static final String PROPERTY_EX_CHANNEL_IDS = 'exchannelIds'
     public File apkFile
 
     public void setup() {
@@ -31,7 +32,11 @@ class ChannelMaker extends DefaultTask {
             if (hasIds) {
                 channelIds = project.getProperties().get(PROPERTY_CHANNEL_IDS)
             }
-            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds)
+            String exChannelIds = ""
+            if (project.hasProperty(PROPERTY_EX_CHANNEL_IDS)) {
+                exChannelIds = project.getProperties().get(PROPERTY_EX_CHANNEL_IDS)
+            }
+            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds, exChannelIds)
         }
     }
 
@@ -55,14 +60,14 @@ class ChannelMaker extends DefaultTask {
         return true
     }
 
-    private void executePython(String url, String storePassword, String storeFilePath, String apkName, String channelIds) {
+    private void executePython(String url, String storePassword, String storeFilePath, String apkName, String channelIds, String exChannelIds) {
         def multiChannelPyFile = MultiChannelPlugin.class.getClassLoader().getResource("package_multi_channels.py")
         def file = project.file('build/package_multi_channels.py')
         file.text = multiChannelPyFile.text
         if (apkName == null || apkName.trim().length() == 0) {
             apkName = PluginExtension.DEFAULT_APK_NAME
         }
-        def progress = "python ${file.path} ${apkFile.path} ${url} ${storePassword} ${storeFilePath} ${apkName} ${channelIds}".execute()
+        def progress = "python ${file.path} -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword} -key_store ${storeFilePath} -default_apk_name ${apkName} -channel_ids ${channelIds} -ex_channel_ids ${exChannelIds}".execute()
 
         progress.inputStream.eachLine { text ->
             println text
