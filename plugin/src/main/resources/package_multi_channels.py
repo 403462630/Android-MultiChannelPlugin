@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import zipfile
 import json
 import urllib2
 import commands
 import sys
 from os import path
+import argparse
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -36,23 +39,34 @@ key_store = ''
 channel_ids = []
 default_apk_name = 'app-{code}.apk'
 
-argv_len = len(sys.argv)
-if argv_len >= 2:
-    apk_path = sys.argv[1]
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-apk_path', action='store', dest='apk_path', help='the apk path')
+parser.add_argument('-json_path', action='store', dest='json_path', help='the channel data config path')
+parser.add_argument('-key_password', action='store', dest='key_password', help='the password of keystore')
+parser.add_argument('-key_store', action='store', dest='key_store', help='the keystore')
+parser.add_argument('-default_apk_name', action='store', dest='default_apk_name', help='the default apk name')
+parser.add_argument('-channel_ids', action='store', dest='channel_ids', help='the channel packaged')
+parser.add_argument('-ex_channel_ids', action='store', dest='ex_channel_ids', help='the channel to exclude')
+argResult = parser.parse_args()
+apk_path = argResult.apk_path
+json_path = argResult.json_path
+key_password = argResult.key_password
+key_store = argResult.key_store
+default_apk_name = argResult.default_apk_name
+channel_ids = argResult.channel_ids
+ex_channel_ids = argResult.ex_channel_ids
+
+if apk_path and len(apk_path) > 0:
     base_dir = path.dirname(apk_path)
     base_apk = path.basename(apk_path)
     print("base_dir: {base_dir}, base_apk: {base_apk}".format(base_dir=base_dir, base_apk=base_apk))
-if argv_len >= 3:
-    json_path = sys.argv[2]
-if argv_len >= 4:
-    key_password = sys.argv[3]
-if argv_len >= 5:
-    key_store = sys.argv[4]
-if argv_len >= 6:
-    default_apk_name = sys.argv[5]
-if argv_len >= 7:
-    channel_ids = sys.argv[6].split(',')
-if key_store == '':
+if channel_ids and len(channel_ids) > 0:
+    channel_ids = channel_ids.split(',')
+if ex_channel_ids and len(ex_channel_ids) > 0:
+    ex_channel_ids = ex_channel_ids.split(',')
+
+if not key_store:
     key_store_str = commands.getoutput("find . -maxdepth 1 -name '*.keystore' ")
     key_store_arr = key_store_str.split('\n')
     print key_store_arr
@@ -69,6 +83,8 @@ commands.getoutput("find {base} -type f -not -name '{base_apk}' -delete".format(
 for channel in data:
     if channel_ids and not (str(channel["id"]) in channel_ids):
         continue
+    if ex_channel_ids and (str(channel["id"]) in ex_channel_ids):
+        continue
     empty_channel_file_name = "fc-multi-channel-{channel}-{channel_id}".format(channel=channel["code"], channel_id=channel["id"])
     empty_channel_file = "{base}/META-INF/{empty_channel_file_name}".format(base=base_dir, empty_channel_file_name=empty_channel_file_name)
     commands.getoutput("touch {empty_channel_file}".format(empty_channel_file=empty_channel_file))
@@ -82,15 +98,15 @@ for channel in data:
     zipped.write(empty_channel_file, "META-INF/{empty_channel_file_name}".format(channel=channel["code"], empty_channel_file_name=empty_channel_file_name))
     zipped.close()
     if apk_signer == '':
-      print 'apksigner {apk_name}: warning no found apksigner command'.format(apk_name=apk_name)
+        print 'apksigner {apk_name}: warning no found apksigner command'.format(apk_name=apk_name)
     elif key_store == '':
-      print 'apksigner {apk_name}: warning no found keystore'.format(apk_name=apk_name)
+        print 'apksigner {apk_name}: warning no found keystore'.format(apk_name=apk_name)
     else:
-      signapk = "echo '{key_password}' | {apk_signer} sign --ks {key_store} {apk_name}".format(key_password=key_password, apk_signer=apk_signer, key_store=key_store, apk_name=apk_name)
-      print signapk
-      result = commands.getoutput(signapk)
-      result_array = result.split('\n')
-      if len(result_array) > 1:
-          print result
-      else:
-          print 'apksigner {apk_name} success'.format(apk_name=apk_name)
+        signapk = "echo '{key_password}' | {apk_signer} sign --ks {key_store} {apk_name}".format(key_password=key_password, apk_signer=apk_signer, key_store=key_store, apk_name=apk_name)
+        print signapk
+        result = commands.getoutput(signapk)
+        result_array = result.split('\n')
+        if len(result_array) > 1:
+            print result
+        else:
+            print 'apksigner {apk_name} success'.format(apk_name=apk_name)
