@@ -3,14 +3,14 @@ apply plugin: 'multiChannel'
 
 buildscript {
     repositories {
-        maven { url "http://fc.bintray.com/maven" }
+        maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.0.3'
+        classpath 'fc.multi.channel:plugin:1.1.0'
     }
 }
 repositories {
-    maven { url "http://fc.bintray.com/maven" }
+    maven { url "http://dl.bintray.com/403462630/maven" }
 }
 
 android {
@@ -63,7 +63,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'fc.multi.channel:library:1.0.0'
+    compile 'fc.multi.channel:library:1.1.0'
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile "com.google.code.gson:gson:2.3.1"
     testCompile 'junit:junit:4.12'

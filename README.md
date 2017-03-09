@@ -8,10 +8,10 @@
 ```
 buildscript {
     repositories {
-        maven { url "http://fc.bintray.com/maven" }
+        maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.0.4'
+        classpath 'fc.multi.channel:plugin:1.1.0'
     }
 }
 ```
@@ -57,10 +57,10 @@ multiChannel {
 1. 在build.gradle中配置如下：
 ```
 repositories {
-    maven { url "http://fc.bintray.com/maven" }
+    maven { url "http://dl.bintray.com/403462630/maven" }
 }
 dependencies {
-    compile 'fc.multi.channel:library:1.0.0'
+    compile 'fc.multi.channel:library:1.1.0'
 }
 ```
 2. 使用api

@@ -44,7 +44,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        userOrg = "fc"
+//        userOrg = "fc"
         name = project.ext.projectName    //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
