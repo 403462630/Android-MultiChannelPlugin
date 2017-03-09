@@ -44,6 +44,8 @@ multiChannel {
 ./gradlew assembleReleaseMultiChannel 
 还可以使用-PchannelIds参数指定打指定渠道包(多个用,隔开)
 ./gradlew assembleReleaseMultiChannel -PchannelIds=1,2
+还可以使用-PexchannelIds参数指定过滤某些渠道包(多个用,隔开)
+./gradlew assembleReleaseMultiChannel -PchannelIds=1,2 -PexchannelIds=1
 ```
 
 如果你在app的build.gradle中添加了productFlavors，那么task的名字就不一定是assembleDebugMultiChannel和assembleReleaseMultiChannel了,
