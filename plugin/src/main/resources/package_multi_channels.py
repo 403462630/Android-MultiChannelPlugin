@@ -54,6 +54,7 @@ json_path = argResult.json_path
 key_password = argResult.key_password
 key_store = argResult.key_store
 default_apk_name = argResult.default_apk_name
+
 channel_ids = argResult.channel_ids
 ex_channel_ids = argResult.ex_channel_ids
 
@@ -103,7 +104,7 @@ for channel in data:
         print 'apksigner {apk_name}: warning no found keystore'.format(apk_name=apk_name)
     else:
         signapk = "echo '{key_password}' | {apk_signer} sign --ks {key_store} {apk_name}".format(key_password=key_password, apk_signer=apk_signer, key_store=key_store, apk_name=apk_name)
-        print signapk
+
         result = commands.getoutput(signapk)
         result_array = result.split('\n')
         if len(result_array) > 1:

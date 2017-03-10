@@ -23,6 +23,9 @@ class MultiChannelPlugin implements Plugin<Project> {
                 channelMaker.setup()
                 channelMaker.dependsOn "assemble${variantName}"
             }
+
+            ChannelMaker channelMaker = project.tasks.create("packageMultiChannel", ChannelMaker)
+            channelMaker.setup()
         }
     }
 }

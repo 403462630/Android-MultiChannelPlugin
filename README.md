@@ -11,7 +11,7 @@ buildscript {
         maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.1.0'
+        classpath 'fc.multi.channel:plugin:1.2.1'
     }
 }
 ```
@@ -46,6 +46,9 @@ multiChannel {
 ./gradlew assembleReleaseMultiChannel -PchannelIds=1,2
 还可以使用-PexchannelIds参数指定过滤某些渠道包(多个用,隔开)
 ./gradlew assembleReleaseMultiChannel -PchannelIds=1,2 -PexchannelIds=1
+
+还可以对已存在的apk打多渠道包,用-PapkPath指定apk的位置
+./gradlew packageMultiChannel -PapkPath=app/build/outputs/apk/app-debug.apk -PchannelIds=1,2 -PexchannelIds=1
 ```
 
 如果你在app的build.gradle中添加了productFlavors，那么task的名字就不一定是assembleDebugMultiChannel和assembleReleaseMultiChannel了,

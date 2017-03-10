@@ -4,9 +4,12 @@ apply plugin: 'multiChannel'
 buildscript {
     repositories {
         maven { url "http://dl.bintray.com/403462630/maven" }
+//        maven {
+//            url uri('../plugin/libs')
+//        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.1.0'
+        classpath 'fc.multi.channel:plugin:1.2.1'
     }
 }
 repositories {
