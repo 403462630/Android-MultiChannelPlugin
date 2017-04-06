@@ -9,7 +9,7 @@ buildscript {
 //        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.2.1'
+        classpath 'fc.multi.channel:plugin:1.2.2'
     }
 }
 repositories {

@@ -80,7 +80,7 @@ data = getJsonData(json_path)
 
 commands.getoutput("rm -rf {base}/META-INF".format(base=base_dir))
 commands.getoutput("mkdir {base}/META-INF".format(base=base_dir))
-commands.getoutput("find {base} -type f -not -name '{base_apk}' -delete".format(base=base_dir, base_apk=base_apk))
+commands.getoutput("find {base} -type f -not -name '{base_apk}' -name '*.apk' -delete".format(base=base_dir, base_apk=base_apk))
 for channel in data:
     if channel_ids and not (str(channel["id"]) in channel_ids):
         continue
