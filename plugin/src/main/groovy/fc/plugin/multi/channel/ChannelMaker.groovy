@@ -3,6 +3,8 @@ package fc.plugin.multi.channel
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
+import javax.swing.plaf.TextUI
+
 /**
  * Created by rjhy on 17-2-6.
  */
@@ -27,6 +29,7 @@ class ChannelMaker extends DefaultTask {
                 apkFile = new File(project.getProperties().get(PROPERTY_APK_PATH))
             }
         }
+
         if (check(multiChannel)) {
             String url = multiChannel.channel.url
             if (url.startsWith("file:")) {
@@ -44,7 +47,10 @@ class ChannelMaker extends DefaultTask {
             if (project.hasProperty(PROPERTY_EX_CHANNEL_IDS)) {
                 exChannelIds = project.getProperties().get(PROPERTY_EX_CHANNEL_IDS)
             }
-            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds, exChannelIds)
+            if (multiChannel.jiagu && multiChannel.jiagu.isEnable) {
+                executeJiagu(multiChannel.jiagu.username, multiChannel.jiagu.password, multiChannel.jiagu.path, apkFile.path, multiChannel.storeFile.path, multiChannel.storePassword, multiChannel.keyAlias, multiChannel.keyAliasPassword)
+            }
+//            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds, exChannelIds)
         }
     }
 
@@ -71,6 +77,69 @@ class ChannelMaker extends DefaultTask {
             return false
         }
         return true
+    }
+
+    private void executeJiagu(String username, String password, String jiaguPath, String apkPath, String storeFilePath, String storePassword, String keyAlias, String keyAliasPassword) {
+        def jiaguPyFile = MultiChannelPlugin.class.getClassLoader().getResource("jiagu.py")
+        def file = project.file('build/jiagu.py')
+        file.text = jiaguPyFile.text
+
+        StringBuffer buffer = new StringBuffer()
+        buffer.append("python ${file.path} ")
+
+        if (username == null || username.trim().length() <= 0) {
+            throw IllegalArgumentException("error: username is null")
+        }
+        buffer.append(" -username ${username}")
+
+        if (password == null || password.trim().length() <= 0) {
+            throw IllegalArgumentException("error: password is null")
+        }
+        buffer.append(" -password ${password}")
+
+        if (jiaguPath == null || jiaguPath.trim().length() <= 0) {
+            throw IllegalArgumentException("error: jiagu_path is null")
+        }
+        buffer.append(" -jiagu_path ${jiaguPath}")
+
+        if (apkPath == null || apkPath.trim().length() <= 0) {
+            throw IllegalArgumentException("error: apk_path is null")
+        }
+        buffer.append(" -apk_path ${apkPath}")
+
+        if (storeFilePath == null || storeFilePath.trim().length() <= 0) {
+            throw IllegalArgumentException("error: key_store is null")
+        }
+        buffer.append(" -key_store ${storeFilePath}")
+
+        if (storePassword == null || storePassword.trim().length() <= 0) {
+            throw IllegalArgumentException("error: key_password is null")
+        }
+        buffer.append(" -key_password ${storePassword}")
+
+        if (keyAlias == null || keyAlias.trim().length() <= 0) {
+            throw IllegalArgumentException("error: key_alias is null")
+        }
+        buffer.append(" -key_alias ${keyAlias}")
+
+        if (keyAliasPassword == null || keyAliasPassword.trim().length() <= 0) {
+            throw IllegalArgumentException("error: key_alias_password is null")
+        }
+        buffer.append(" -key_alias_password ${keyAliasPassword}")
+
+        String exeStr =  buffer.toString()
+
+        println '------start jiagu apk------'
+        def progress = exeStr.execute()
+
+        progress.inputStream.eachLine { text ->
+            println text
+        }
+        String errorText = progress.errorStream.text
+        if (errorText != null && errorText.trim().length() > 0) {
+            throw new IllegalArgumentException(errorText)
+        }
+        println '------end jiagu apk------'
     }
 
     private void executePython(String url, String storePassword, String storeFilePath, String apkName, String channelIds, String exChannelIds) {

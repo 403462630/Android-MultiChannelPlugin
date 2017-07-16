@@ -10,7 +10,7 @@ class MultiChannelPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.extensions.create("multiChannel", PluginExtension, new ChannelConfig())
+        project.extensions.create("multiChannel", PluginExtension, new ChannelConfig(), new JiaGuConfig())
         project.tasks.each { task ->
             println "name: ${task.name}, group:${task.group}"
         }

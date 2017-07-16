@@ -5,7 +5,6 @@ package fc.plugin.multi.channel
  */
 class ChannelConfig {
     String url
-
     void url(String url) {
         this.url = url
     }
