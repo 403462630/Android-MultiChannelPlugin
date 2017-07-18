@@ -3,13 +3,13 @@ apply plugin: 'multiChannel'
 
 buildscript {
     repositories {
-//        maven { url "http://dl.bintray.com/403462630/maven" }
-        maven {
-            url uri('../plugin/libs')
-        }
+        maven { url "http://dl.bintray.com/403462630/maven" }
+//        maven {
+//            url uri('../plugin/libs')
+//        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.2.3'
+        classpath 'fc.multi.channel:plugin:1.4.0'
     }
 }
 repositories {
@@ -57,8 +57,8 @@ multiChannel {
     keyAliasPassword "123456"
     jiagu {
         isEnable true
-        username '403462630@qq.com'
-        password "beautiful201314"
+        username '--'
+        password "--"
         path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
     }
     channel {

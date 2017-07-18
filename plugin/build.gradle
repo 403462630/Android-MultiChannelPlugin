@@ -7,7 +7,7 @@ ext {
 apply from: "../bintray.gradle"
 
 group="fc.multi.channel"
-version="1.2.3"
+version="1.4.0"
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
@@ -34,8 +34,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: 'file:libs')
-    }
-}
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        repository(url: 'file:libs')
+//    }
+//}

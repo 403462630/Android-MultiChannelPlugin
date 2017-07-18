@@ -10,7 +10,9 @@ import javax.swing.plaf.TextUI
  */
 class ChannelMaker extends DefaultTask {
     private static final String PROPERTY_CHANNEL_IDS = 'channelIds'
+    private static final String PROPERTY_JIAGU_CHANNEL_IDS = 'jiaguChannelIds'
     private static final String PROPERTY_EX_CHANNEL_IDS = 'exchannelIds'
+    private static final String PROPERTY_JIAGU_EX_CHANNEL_IDS = 'jiaguExchannelIds'
     private static final String PROPERTY_APK_PATH = 'apkPath'
 
     public File apkFile
@@ -47,10 +49,23 @@ class ChannelMaker extends DefaultTask {
             if (project.hasProperty(PROPERTY_EX_CHANNEL_IDS)) {
                 exChannelIds = project.getProperties().get(PROPERTY_EX_CHANNEL_IDS)
             }
+
+            boolean hasJiaguIds = project.hasProperty(PROPERTY_JIAGU_CHANNEL_IDS)
+            String jiaguChannelIds = ""
+            if (hasJiaguIds) {
+                jiaguChannelIds = project.getProperties().get(PROPERTY_JIAGU_CHANNEL_IDS)
+            }
+            String jiaguExChannelIds = ""
+            if (project.hasProperty(PROPERTY_JIAGU_EX_CHANNEL_IDS)) {
+                exChannelIds = project.getProperties().get(PROPERTY_JIAGU_EX_CHANNEL_IDS)
+            }
+            boolean isEnableJiagu = false
             if (multiChannel.jiagu && multiChannel.jiagu.isEnable) {
                 executeJiagu(multiChannel.jiagu.username, multiChannel.jiagu.password, multiChannel.jiagu.path, apkFile.path, multiChannel.storeFile.path, multiChannel.storePassword, multiChannel.keyAlias, multiChannel.keyAliasPassword)
+                isEnableJiagu = true
             }
-//            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds, exChannelIds)
+
+            executePython(url, multiChannel.storePassword, multiChannel.storeFile.path, multiChannel.apkName, channelIds, exChannelIds, jiaguChannelIds, jiaguExChannelIds, isEnableJiagu)
         }
     }
 
@@ -142,7 +157,7 @@ class ChannelMaker extends DefaultTask {
         println '------end jiagu apk------'
     }
 
-    private void executePython(String url, String storePassword, String storeFilePath, String apkName, String channelIds, String exChannelIds) {
+    private void executePython(String url, String storePassword, String storeFilePath, String apkName, String channelIds, String exChannelIds, String jiaguChannelIds, String jiaguExChannelIds, boolean isEnableJiagu) {
         def multiChannelPyFile = MultiChannelPlugin.class.getClassLoader().getResource("package_multi_channels.py")
         def file = project.file('build/package_multi_channels.py')
         file.text = multiChannelPyFile.text
@@ -151,7 +166,7 @@ class ChannelMaker extends DefaultTask {
         }
 
         StringBuffer buffer = new StringBuffer()
-        buffer.append("python ${file.path}  -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword}")
+        buffer.append("python ${file.path}  -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword} ")
         if (storeFilePath != null && storeFilePath.trim().length() > 0) {
             buffer.append(" -key_store ${storeFilePath}")
         }
@@ -164,7 +179,19 @@ class ChannelMaker extends DefaultTask {
         if (exChannelIds != null && exChannelIds.trim().length() > 0) {
             buffer.append(" -ex_channel_ids ${exChannelIds}")
         }
+        
+        if (jiaguChannelIds != null && jiaguChannelIds.trim().length() > 0) {
+            buffer.append(" -jiagu_channel_ids ${jiaguChannelIds}")
+        }
+        if (jiaguExChannelIds != null && jiaguExChannelIds.trim().length() > 0) {
+            buffer.append(" -jiagu_ex_channel_ids ${jiaguExChannelIds}")
+        }
+        if (isEnableJiagu) {
+            buffer.append(" -is_enable_jiagu ${isEnableJiagu}")
+        }
+
         String exeStr =  buffer.toString()//"python ${file.path} -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword} -key_store ${storeFilePath} -default_apk_name ${apkName} -channel_ids ${channelIds} -ex_channel_ids ${exChannelIds}"
+        println "----${exeStr}"
         println '------start build multi channel apk------'
         def progress = exeStr.execute()
 

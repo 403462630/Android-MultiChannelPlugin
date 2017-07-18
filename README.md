@@ -25,6 +25,18 @@ multiChannel {
     storePassword "123456"
     //签名证书
     storeFile file('../test.jks')
+    keyAlias "test"
+    keyAliasPassword "123456"
+    jiagu {
+        //是否开启加固功能
+        isEnable true
+        //账号
+        username '--'
+        //密码
+        password "--"
+        //加固jar包的路径
+        path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
+    }
     channel {
         //本地多渠道配置json文件
         url 'file:../channel.json'
@@ -49,6 +61,13 @@ multiChannel {
 
 还可以对已存在的apk打多渠道包,用-PapkPath指定apk的位置
 ./gradlew packageMultiChannel -PapkPath=app/build/outputs/apk/app-debug.apk -PchannelIds=1,2 -PexchannelIds=1
+
+
+1.4.0 新增功能（360加固）
+新增-PjiaguChannelIds（指定哪些渠道需要加固，默认所有） 和 -PjiaguExchannelIds（指定哪些不需要加固）参数
+./gradlew packageMultiChannel -PjiaguChannelIds=9
+
+
 ```
 
 如果你在app的build.gradle中添加了productFlavors，那么task的名字就不一定是assembleDebugMultiChannel和assembleReleaseMultiChannel了,
@@ -78,4 +97,5 @@ Map map = ChannelReader.getExtInfo(this);
 
 
 ## 注意
-本插件在使用了python和shell脚本，请保证你的电脑支持python和shell
+1. 本插件在使用了python和shell脚本，请保证你的电脑支持python和shell
+2. 证书密码和别名密码要一致（暂时不知道为啥，不然用apksigner签名报错）
