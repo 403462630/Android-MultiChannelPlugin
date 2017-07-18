@@ -65,7 +65,8 @@ multiChannel {
 
 1.4.0 新增功能（360加固）
 新增-PjiaguChannelIds（指定哪些渠道需要加固，默认所有） 和 -PjiaguExchannelIds（指定哪些不需要加固）参数
-./gradlew packageMultiChannel -PjiaguChannelIds=9
+//注意不能对debug包加固
+./gradlew assembleReleaseMultiChannel -PjiaguChannelIds=9
 
 
 ```
