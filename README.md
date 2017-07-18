@@ -11,7 +11,7 @@ buildscript {
         maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.2.2'
+        classpath 'fc.multi.channel:plugin:1.4.0'
     }
 }
 ```
