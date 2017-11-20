@@ -83,7 +83,7 @@ repositories {
     maven { url "http://dl.bintray.com/403462630/maven" }
 }
 dependencies {
-    compile 'fc.multi.channel:library:1.1.0'
+    compile 'fc.multi.channel:library:1.1.1'
 }
 ```
 2. 使用api

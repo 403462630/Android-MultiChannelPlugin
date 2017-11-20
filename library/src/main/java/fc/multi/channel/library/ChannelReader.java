@@ -36,7 +36,17 @@ public class ChannelReader {
         update(context, defaultChannelId);
     }
 
-    private static String update(Context context, String defaultChannelId) {
+    public static void initAsync(final Context context, final String defaultChannelId) {
+        saveDefaultChannelId(context, defaultChannelId);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                update(context, defaultChannelId);
+            }
+        }).start();
+    }
+
+    private synchronized static String update(Context context, String defaultChannelId) {
         ApplicationInfo appinfo = context.getApplicationInfo();
         String sourceDir = appinfo.sourceDir;
         String ret = "";
