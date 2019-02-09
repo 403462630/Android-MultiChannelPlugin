@@ -7,7 +7,7 @@ ext {
 apply from: "../bintray.gradle"
 
 group="fc.multi.channel"
-version="1.4.0"
+version="1.5.2"
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource

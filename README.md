@@ -11,7 +11,10 @@ buildscript {
         maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.4.0'
+        // 如果gradle 版本高于或等于3.3.0 则使用1.5.2
+        classpath 'fc.multi.channel:plugin:1.5.2'
+        // 如果gradle 版本低于3.3.0 则使用1.4.0
+        //classpath 'fc.multi.channel:plugin:1.4.0'
     }
 }
 ```
@@ -67,7 +70,6 @@ multiChannel {
 新增-PjiaguChannelIds（指定哪些渠道需要加固，默认所有） 和 -PjiaguExchannelIds（指定哪些不需要加固）参数
 //注意不能对debug包加固
 ./gradlew assembleReleaseMultiChannel -PjiaguChannelIds=9
-
 
 ```
 

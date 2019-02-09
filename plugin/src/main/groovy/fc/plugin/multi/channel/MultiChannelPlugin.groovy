@@ -18,8 +18,12 @@ class MultiChannelPlugin implements Plugin<Project> {
             project.android.applicationVariants.all { variant ->
                 def variantName = variant.name.capitalize()
                 ChannelMaker channelMaker = project.tasks.create("assemble${variantName}MultiChannel", ChannelMaker)
-                File apkFile = variant.outputs[0].outputFile
-                channelMaker.apkFile = apkFile
+//                File apkFile = variant.outputs[0].outputFile
+//                println("========" + variant.outputs[0].class + "========")
+//                println("========" + variant.getPackageApplicationProvider().get().class + "========")
+//                println("========" + apkFile.absolutePath + "========")
+//                println("========" + variant.getPackageApplicationProvider().get().outputDirectory.absolutePath + File.separator + variant.getPackageApplicationProvider().get().getApkNames()[0] + "========")
+                channelMaker.apkFile = new File(variant.getPackageApplicationProvider().get().outputDirectory.absolutePath + File.separator + variant.getPackageApplicationProvider().get().getApkNames()[0])
                 channelMaker.setup()
                 channelMaker.dependsOn "assemble${variantName}"
             }

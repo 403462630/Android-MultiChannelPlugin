@@ -9,7 +9,7 @@ buildscript {
 //        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.4.0'
+        classpath 'fc.multi.channel:plugin:1.5.2'
     }
 }
 repositories {
@@ -55,7 +55,7 @@ multiChannel {
     keyAlias "test"
     keyAliasPassword "123456"
     jiagu {
-        isEnable true
+        isEnable false
         username '--'
         password "--"
         path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
