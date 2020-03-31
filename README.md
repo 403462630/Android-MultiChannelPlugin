@@ -11,8 +11,10 @@ buildscript {
         maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        // 如果gradle 版本高于或等于3.3.0 则使用1.5.4
+        // 如果gradle 版本高于或等于3.6.1 则使用1.5.4
         classpath 'fc.multi.channel:plugin:1.5.4'
+        // 如果gradle 版本高于或等于3.3.0 则使用1.5.2
+        //classpath 'fc.multi.channel:plugin:1.5.2'
         // 如果gradle 版本低于3.3.0 则使用1.4.0
         //classpath 'fc.multi.channel:plugin:1.4.0'
     }
