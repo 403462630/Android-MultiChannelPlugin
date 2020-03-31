@@ -4,12 +4,13 @@ apply plugin: 'multiChannel'
 buildscript {
     repositories {
         maven { url "http://dl.bintray.com/403462630/maven" }
-//        maven {
-//            url uri('../plugin/libs')
-//        }
+        maven {
+            url uri('../plugin/libs')
+        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.5.2'
+        classpath 'fc.multi.channel:plugin:1.5.4'
+//        project(":plugin")
     }
 }
 repositories {
@@ -45,6 +46,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 multiChannel {
