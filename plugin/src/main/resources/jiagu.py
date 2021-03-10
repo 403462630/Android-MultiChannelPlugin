@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import commands
 import sys
 import argparse
 from os import path
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+if sys.version_info.major <= 2:
+  import commands as subprocess
+  reload(sys)
+  sys.setdefaultencoding("utf-8")
+else:
+  import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-apk_path', action='store', dest='apk_path', help='the apk path')
@@ -39,9 +42,9 @@ importsign = "java -jar {jiaguPath}/jiagu.jar -importsign {key_store} {key_passw
 print importsign
 jiagu = "java -jar {jiaguPath}/jiagu.jar -jiagu {apk_path} {apk_dir} -autosign".format(jiaguPath=jiagu_path, apk_path=apk_path, apk_dir=apk_dir)
 print jiagu
-result = commands.getoutput(login)
+result = subprocess.getoutput(login)
 print result
-result = commands.getoutput(importsign)
+result = subprocess.getoutput(importsign)
 print result
-result = commands.getoutput(jiagu)
+result = subprocess.getoutput(jiagu)
 print result
