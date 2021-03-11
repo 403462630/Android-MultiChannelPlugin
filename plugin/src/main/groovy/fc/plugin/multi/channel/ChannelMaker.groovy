@@ -100,7 +100,7 @@ class ChannelMaker extends DefaultTask {
         file.text = jiaguPyFile.text
 
         StringBuffer buffer = new StringBuffer()
-        buffer.append("python ${file.path} ")
+        buffer.append("python3 ${file.path} ")
 
         if (username == null || username.trim().length() <= 0) {
             throw IllegalArgumentException("error: username is null")
@@ -166,7 +166,7 @@ class ChannelMaker extends DefaultTask {
         }
 
         StringBuffer buffer = new StringBuffer()
-        buffer.append("python ${file.path}  -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword} ")
+        buffer.append("python3 ${file.path}  -apk_path ${apkFile.path} -json_path ${url} -key_password ${storePassword} ")
         if (storeFilePath != null && storeFilePath.trim().length() > 0) {
             buffer.append(" -key_store ${storeFilePath}")
         }
