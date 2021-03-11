@@ -11,9 +11,9 @@ buildscript {
         maven { url "http://dl.bintray.com/403462630/maven" }
     }
     dependencies {
-        // python2 or python3
-        classpath 'fc.multi.channel:plugin:1.7.0'
-        // only python2 
+        // 使用python3
+        classpath 'fc.multi.channel:plugin:1.7.1'
+        // 使用 python2 
         //classpath 'fc.multi.channel:plugin:1.5.4'
     }
 }
