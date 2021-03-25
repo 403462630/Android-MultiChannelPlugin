@@ -23,11 +23,11 @@ def getJsonData(str):
         jsonobj = json.load(urllib2.urlopen(str))
     return jsonobj
 
-# try:
-#     H = dict(line.strip().split('=') for line in open('local.properties') if not line.startswith('#') and not line.startswith('\n'))
-# except IOError:
-#     H = dict(line.strip().split('=') for line in open('../local.properties') if not line.startswith('#') and not line.startswith('\n'))
-sdk = '/Users/fangcan/Documents/Android/sdk' #H['sdk.dir']
+try:
+    H = dict(line.strip().split('=') for line in open('local.properties') if not line.startswith('#') and not line.startswith('\n'))
+except IOError:
+    H = dict(line.strip().split('=') for line in open('../local.properties') if not line.startswith('#') and not line.startswith('\n'))
+sdk = H['sdk.dir']
 
 apk_signer_str = subprocess.getoutput("find {sdk}/build-tools/ -name 'apksigner'".format(sdk=sdk))
 apk_signer_arr = apk_signer_str.split('\n')

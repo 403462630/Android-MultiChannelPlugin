@@ -37,14 +37,14 @@ if apk_path and len(apk_path) > 0:
     apk_dir = path.dirname(apk_path)
 
 login = "java -jar {jiaguPath}/jiagu.jar -login {username} {password}".format(jiaguPath=jiagu_path, username=username, password=password)
-print login
+print(login)
 importsign = "java -jar {jiaguPath}/jiagu.jar -importsign {key_store} {key_password} {key_alias} {key_alias_password}".format(jiaguPath=jiagu_path, key_store=key_store, key_password=key_password, key_alias=key_alias, key_alias_password=key_alias_password)
-print importsign
+print(importsign)
 jiagu = "java -jar {jiaguPath}/jiagu.jar -jiagu {apk_path} {apk_dir} -autosign".format(jiaguPath=jiagu_path, apk_path=apk_path, apk_dir=apk_dir)
-print jiagu
+print(jiagu)
 result = subprocess.getoutput(login)
-print result
+print(result)
 result = subprocess.getoutput(importsign)
-print result
+print(result)
 result = subprocess.getoutput(jiagu)
-print result
+print(result)
