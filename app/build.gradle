@@ -1,20 +1,20 @@
 apply plugin: 'com.android.application'
-apply plugin: 'multiChannel'
+//apply plugin: 'multiChannel'
 
 buildscript {
     repositories {
-        maven { url "http://dl.bintray.com/403462630/maven" }
-        maven {
-            url uri('../plugin/libs')
-        }
+//        maven {
+//            url uri('../plugin/libs')
+//        }
     }
     dependencies {
-        classpath 'fc.multi.channel:plugin:1.5.4'
-//        project(":plugin")
+//        classpath 'fc.multi.channel:plugin:0.0.1'
+//        classpath project(':plugin')
     }
 }
+
 repositories {
-    maven { url "http://dl.bintray.com/403462630/maven" }
+//    maven { url "http://dl.bintray.com/403462630/maven" }
 }
 
 android {
@@ -50,37 +50,36 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
-multiChannel {
-    //签名密码
-    storePassword "123456"
-    //签名证书
-    storeFile file('../test.jks')
-    keyAlias "test"
-    keyAliasPassword "123456"
-    jiagu {
-        isEnable false
-        username '--'
-        password "--"
-        path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
-    }
-    channel {
-        //本地多渠道配置json文件
-        url 'file:../channel.json'
-        //或者是http地址
-//        url "http://pbservice.newwinner.net.cn:11010/_market"
-    }
-    //生成的apk名称，code、id、name对应json中的key
-    apkName "app-{code}-{id}-{name}-${android.defaultConfig.versionName}.apk"
-}
+//multiChannel {
+//    //签名密码
+//    storePassword "123456"
+//    //签名证书
+//    storeFile file('../test.jks')
+//    keyAlias "test"
+//    keyAliasPassword "123456"
+//    jiagu {
+//        isEnable false
+//        username '--'
+//        password "--"
+//        path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
+//    }
+//    channel {
+//        //本地多渠道配置json文件
+//        url 'file:../channel.json'
+//        //或者是http地址
+////        url "http://pbservice.newwinner.net.cn:11010/_market"
+//    }
+//    //生成的apk名称，code、id、name对应json中的key
+//    apkName "app-{code}-{id}-{name}-${android.defaultConfig.versionName}.apk"
+//}
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'fc.multi.channel:library:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "com.google.code.gson:gson:2.8.6"
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(":library")
 }

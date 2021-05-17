@@ -43,7 +43,7 @@ multiChannel {
     channel {
         //本地多渠道配置json文件
         url 'file:../channel.json'
-        //或者是http地址
+        //或者是get方式的http请求
 //        url "http://xxxx"
     }
     //生成的apk名称，code、id、name对应json中的key
