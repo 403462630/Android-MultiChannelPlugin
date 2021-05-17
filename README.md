@@ -3,18 +3,18 @@
 
  [json数据格式](channel.json)
 
+<font color="red">注意：最新的版本只支持python3，升级前注意升级你的python环境</font>
+
 ### 怎么使用plugin
 1 . 在buildscript中添加如下配置
 ```
 buildscript {
     repositories {
-        maven { url "http://dl.bintray.com/403462630/maven" }
+       maven { url 'https://jitpack.io' }
     }
     dependencies {
         // 使用python3
-        classpath 'fc.multi.channel:plugin:1.7.1'
-        // 使用 python2 
-        //classpath 'fc.multi.channel:plugin:1.5.4'
+        classpath 'com.github.403462630.Android-MultiChannelPlugin:plugin:1.0.0'
     }
 }
 ```
@@ -82,10 +82,10 @@ multiChannel {
 1. 在build.gradle中配置如下：
 ```
 repositories {
-    maven { url "http://dl.bintray.com/403462630/maven" }
+    maven { url 'https://jitpack.io' }
 }
 dependencies {
-    compile 'fc.multi.channel:library:1.1.3'
+    implementation 'com.github.403462630.Android-MultiChannelPlugin:library:1.0.0'
 }
 ```
 2. 使用api
@@ -100,5 +100,5 @@ Map map = ChannelReader.getExtInfo(this);
 
 
 ## 注意
-1. 本插件在使用了python和shell脚本，请保证你的电脑支持python和shell
+1. 本插件在使用了python3和shell脚本，请保证你的电脑支持python3和shell
 2. 证书密码和别名密码要一致（暂时不知道为啥，不然用apksigner签名报错）

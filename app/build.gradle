@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'multiChannel'
+apply plugin: 'multiChannel'
 
 buildscript {
     repositories {
 //        maven {
 //            url uri('../plugin/libs')
 //        }
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
-//        classpath 'fc.multi.channel:plugin:0.0.1'
+        classpath 'com.github.403462630.Android-MultiChannelPlugin:plugin:1.0.0'
 //        classpath project(':plugin')
     }
 }
@@ -52,28 +53,28 @@ android {
     }
 }
 
-//multiChannel {
-//    //签名密码
-//    storePassword "123456"
-//    //签名证书
-//    storeFile file('../test.jks')
-//    keyAlias "test"
-//    keyAliasPassword "123456"
-//    jiagu {
-//        isEnable false
-//        username '--'
-//        password "--"
-//        path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
-//    }
-//    channel {
-//        //本地多渠道配置json文件
-//        url 'file:../channel.json'
-//        //或者是http地址
-////        url "http://pbservice.newwinner.net.cn:11010/_market"
-//    }
-//    //生成的apk名称，code、id、name对应json中的key
-//    apkName "app-{code}-{id}-{name}-${android.defaultConfig.versionName}.apk"
-//}
+multiChannel {
+    //签名密码
+    storePassword "123456"
+    //签名证书
+    storeFile file('../test.jks')
+    keyAlias "test"
+    keyAliasPassword "123456"
+    jiagu {
+        isEnable false
+        username '--'
+        password "--"
+        path "/Users/fangcan/Downloads/360jiagubao_mac/jiagu"
+    }
+    channel {
+        //本地多渠道配置json文件
+        url 'file:../channel.json'
+        //或者是http地址
+//        url "http://pbservice.newwinner.net.cn:11010/_market"
+    }
+    //生成的apk名称，code、id、name对应json中的key
+    apkName "app-{code}-{id}-{name}-${android.defaultConfig.versionName}.apk"
+}
 
 
 dependencies {
@@ -81,5 +82,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "com.google.code.gson:gson:2.8.6"
     testImplementation 'junit:junit:4.13.2'
-    implementation project(":library")
+//    implementation project(":library")
+    implementation "com.github.403462630.Android-MultiChannelPlugin:library:1.0.0"
 }
