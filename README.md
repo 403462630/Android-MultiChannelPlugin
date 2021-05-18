@@ -3,7 +3,13 @@
 
  [json数据格式](channel.json)
 
-<font color="red">注意：最新的版本只支持python3，升级前注意升级你的python环境</font>
+<font color="red">注意：最新的版本只支持python3，升级前注意升级你的python环境,并装好了json、subprocess、zipfile、argparse依赖</font>
+```
+pip3 install json
+pip3 install subprocess
+pip3 install zipfile
+pip3 install argparse
+```
 
 ### 怎么使用plugin
 1 . 在buildscript中添加如下配置
